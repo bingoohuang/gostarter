@@ -1,5 +1,6 @@
 # go-starter
-build a starter project for golang, including log, config, ctl, recover, statiq and etc.
+
+<del>build a starter project for golang, including log, config, ctl, recover, statiq and etc.</del>
 
 
 ## build
@@ -15,7 +16,7 @@ Usage: ./build.sh [OPTION]...
 
   -t target   linux/local, default local
   -u yes/no   enable upx compression if upx is available or not
-  -b          binary name, default notify4g
+  -b          binary name, default go-starter
   -h          display help
 ```
 
