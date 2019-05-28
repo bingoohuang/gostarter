@@ -93,6 +93,10 @@ func ipoInit() error {
 		return err
 	}
 
+	if err = initConfigFile(sfs, "/config.tpl.toml", "./config.toml"); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -126,6 +130,27 @@ func initCtl(sfs *fs.StatiqFS, ctlTplName, ctlFilename string) error {
 	}
 
 	fmt.Println(ctlFilename + " created!")
+	return nil
+}
+
+func initConfigFile(sfs *fs.StatiqFS, configTplFileName, configFileName string) error {
+	if _, err := os.Stat(configFileName); err == nil {
+		fmt.Printf("%s already exists, ignored!\n", configFileName)
+		return nil
+	} else if os.IsNotExist(err) {
+		// continue
+	} else {
+		return err
+	}
+
+	conf := sfs.Files[configTplFileName].Data
+	// 0644->即用户具有读写权限，组用户和其它用户具有只读权限；
+	if err := ioutil.WriteFile(configFileName, conf, 0644); err != nil {
+		return err
+	}
+
+	fmt.Println(configFileName + " created!")
+
 	return nil
 }
 

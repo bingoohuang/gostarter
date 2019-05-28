@@ -26,3 +26,8 @@ for dev:
 1. `./buildres.sh`
 1. `statiq -src=res`
 1. `go fmt ./...;sh build.sh`
+
+## start
+
+run `./go-starter -o=false -u`.
+
