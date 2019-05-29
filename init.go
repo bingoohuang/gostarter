@@ -41,6 +41,13 @@ func init() {
 
 	pflag.Parse()
 
+	args := pflag.Args()
+	if len(args) > 0 {
+		fmt.Printf("Unknown args %s\n", strings.Join(args, " "))
+		pflag.PrintDefaults()
+		os.Exit(0)
+	}
+
 	if *help {
 		fmt.Printf("Built on %s from sha1 %s\n", builtTime, sha1ver)
 		pflag.PrintDefaults()
