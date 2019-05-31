@@ -2,6 +2,12 @@
 
 <del>build a starter project for golang, including log, config, ctl, recover, statiq and etc.</del>
 
+## functions
+
+1. viper 聚合配置使用
+1. logrus 日志使用
+1. res 资源内嵌
+1. gin 框架使用
 
 ## build
 
