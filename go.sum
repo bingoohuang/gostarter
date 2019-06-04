@@ -16,6 +16,8 @@ github.com/beorn7/perks v1.0.0/go.mod h1:KWe93zE9D1o94FZ5RNwFwVgaQK1VOXiVxmqh+Ce
 github.com/bingoohuang/faker v0.0.0-20190521151430-dcff11ac7f06/go.mod h1:a/SwpaoIQvCHzQ7LYuRV7xzx/NDYddcI5xfQdvBRxwg=
 github.com/bingoohuang/gou v0.0.0-20190527053107-65a1ed05351e h1:W+dtI6eFX23XRGuZ7PI943pixRbJEKe9XDw1vuGTesc=
 github.com/bingoohuang/gou v0.0.0-20190527053107-65a1ed05351e/go.mod h1:xhMGdgCGKCUkHF00h4b0qMA50fFe0sSV9DD844rIaYQ=
+github.com/bingoohuang/gou v0.0.0-20190527053107-bf3d9b2b55aa5840c442284656ed6b15aedc5a25 h1:vzQlKc0XskDUGOnrhnA0Ers+/26XOcqzuZpfQhT2O6I=
+github.com/bingoohuang/gou v0.0.0-20190527053107-bf3d9b2b55aa5840c442284656ed6b15aedc5a25/go.mod h1:BZKc9X/YGhsL9dFvouK9KO1wkzKTPy1kS2XvdWoBRvg=
 github.com/bingoohuang/notify4g v0.0.0-20190527072945-7382533477bb h1:ct6tjDsfjQAb03Ka1lP/O8f01n7OX0LHwtVGqWYDCfg=
 github.com/bingoohuang/notify4g v0.0.0-20190527072945-7382533477bb/go.mod h1:rycIQySyHJdHSbrLt1QgOsbJOocd76ql8tsqryUikCo=
 github.com/bingoohuang/statiq v0.2.1 h1:L7Uya0pM+wbw4CYkF9DVMJ0h0aSUx4mb0X7udk/M7NA=

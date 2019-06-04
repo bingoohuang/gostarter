@@ -8,6 +8,14 @@
 1. logrus 日志使用
 1. res 资源内嵌
 1. gin 框架使用
+1. pprof 支持
+
+    * `./bin --pprof-addr localhost:6060`
+    * open `http://localhost:6060/debug/pprof` in explorer
+    * or 可视化数据（火焰图），见如下：
+    * `curl http://localhost:6060/debug/pprof/heap > heap.prof`
+    * `go get -u github.com/google/pprof`
+    * `pprof -http=:8080heap.prof`
 
 ## build
 

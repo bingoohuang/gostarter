@@ -3,6 +3,15 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"go-starter/ui"
+	"io/ioutil"
+	_ "net/http/pprof"
+	"os"
+	"path/filepath"
+	"strconv"
+	"strings"
+	"text/template"
+
 	"github.com/bingoohuang/gou"
 	_ "github.com/bingoohuang/notify4g/statiq"
 	"github.com/bingoohuang/statiq/fs"
@@ -10,13 +19,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
-	"go-starter/ui"
-	"io/ioutil"
-	"os"
-	"path/filepath"
-	"strconv"
-	"strings"
-	"text/template"
 )
 
 // refer : https://blog.kowalczyk.info/article/vEja/embedding-build-number-in-go-executable.html
@@ -35,6 +37,7 @@ func init() {
 	pflag.StringP("logdir", "d", "./var", "log dir")
 	pflag.BoolP("logrus", "o", true, "enable logrus")
 	pflag.BoolP("ui", "u", false, "enable simple ui")
+	pprofAddr := gou.PprofAddrPflag()
 
 	// Add more pflags can be set from command line
 	// ...
@@ -61,6 +64,8 @@ func init() {
 		os.Exit(0)
 	}
 
+	gou.StartPprof(*pprofAddr)
+
 	// 从当前位置读取config.toml配置文件
 	viper.SetConfigName("config")
 	viper.SetConfigType("toml")
@@ -84,7 +89,13 @@ func init() {
 	_ = viper.BindPFlags(pflag.CommandLine)
 
 	if viper.GetBool("logrus") {
-		gou.InitLogger(viper.GetString("loglevel"), viper.GetString("logdir"), filepath.Base(os.Args[0])+".log")
+		logdir := viper.GetString("logdir")
+		if err := os.MkdirAll(logdir, os.ModePerm); err != nil {
+			logrus.Panicf("failed to create %s error %v\n", logdir, err)
+		}
+
+		loglevel := viper.GetString("loglevel")
+		gou.InitLogger(loglevel, logdir, filepath.Base(os.Args[0])+".log")
 	} else {
 		logrus.SetLevel(logrus.DebugLevel)
 	}

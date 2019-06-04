@@ -1,10 +1,11 @@
 package ui
 
 import (
-	"github.com/bingoohuang/statiq/fs"
-	"github.com/gin-gonic/gin"
 	"html/template"
 	"net/http"
+
+	"github.com/bingoohuang/statiq/fs"
+	"github.com/gin-gonic/gin"
 
 	_ "go-starter/statiq"
 )

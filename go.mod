@@ -3,7 +3,7 @@ module go-starter
 go 1.12
 
 require (
-	github.com/bingoohuang/gou v0.0.0-20190527053107-65a1ed05351e
+	github.com/bingoohuang/gou v0.0.0-20190527053107-bf3d9b2b55aa5840c442284656ed6b15aedc5a25
 	github.com/bingoohuang/notify4g v0.0.0-20190527072945-7382533477bb
 	github.com/bingoohuang/statiq v0.2.1
 	github.com/fsnotify/fsnotify v1.4.7

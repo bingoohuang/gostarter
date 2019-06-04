@@ -1,11 +1,12 @@
 package main
 
 import (
+	"go-starter/ui"
+
 	"github.com/bingoohuang/gou"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"go-starter/ui"
 )
 
 func main() {
