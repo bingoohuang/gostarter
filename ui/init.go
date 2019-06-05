@@ -48,10 +48,10 @@ func HomepageHandler(c *gin.Context) {
 		Sha1ver:   Sha1ver,
 		BuiltTime: BuiltTime,
 	}
-	JsonOrTpl(args, homepageTpl, c)
+	JSONOrTpl(args, homepageTpl, c)
 }
 
-func JsonOrTpl(args interface{}, tpl *template.Template, c *gin.Context) {
+func JSONOrTpl(args interface{}, tpl *template.Template, c *gin.Context) {
 	fmt := c.Query("format")
 	if fmt == "json" {
 		c.JSON(200, args)

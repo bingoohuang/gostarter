@@ -20,6 +20,8 @@ github.com/bingoohuang/gou v0.0.0-20190527053107-bf3d9b2b55aa5840c442284656ed6b1
 github.com/bingoohuang/gou v0.0.0-20190527053107-bf3d9b2b55aa5840c442284656ed6b15aedc5a25/go.mod h1:BZKc9X/YGhsL9dFvouK9KO1wkzKTPy1kS2XvdWoBRvg=
 github.com/bingoohuang/notify4g v0.0.0-20190527072945-7382533477bb h1:ct6tjDsfjQAb03Ka1lP/O8f01n7OX0LHwtVGqWYDCfg=
 github.com/bingoohuang/notify4g v0.0.0-20190527072945-7382533477bb/go.mod h1:rycIQySyHJdHSbrLt1QgOsbJOocd76ql8tsqryUikCo=
+github.com/bingoohuang/now v0.0.0-20190604094221-3e973286dd2a h1:BtRCU2NPd028cCWOXYgnOu2Bg7BxFSO+bNztLTN93PE=
+github.com/bingoohuang/now v0.0.0-20190604094221-3e973286dd2a/go.mod h1:SZou0n15kP/Z3Vq8lyuH59ML96lepeGzInZw0+KCFw4=
 github.com/bingoohuang/statiq v0.2.1 h1:L7Uya0pM+wbw4CYkF9DVMJ0h0aSUx4mb0X7udk/M7NA=
 github.com/bingoohuang/statiq v0.2.1/go.mod h1:0b9LPVgSSJpbpSBpJqUH7GnuwbYisd32WPxXIo5AMHQ=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
