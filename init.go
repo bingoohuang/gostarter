@@ -12,8 +12,9 @@ import (
 	"strings"
 	"text/template"
 
+	_ "go-starter/statiq"
+
 	"github.com/bingoohuang/gou"
-	_ "github.com/bingoohuang/notify4g/statiq"
 	"github.com/bingoohuang/statiq/fs"
 	"github.com/fsnotify/fsnotify"
 	"github.com/sirupsen/logrus"
