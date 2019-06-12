@@ -32,7 +32,6 @@ echo upx:"${upx}"
 if [[ ${target} = "linux" ]]; then
     export GOOS=linux
     export GOARCH=amd64
-    bin=${bin}_linux_amd64
 fi
 
 ./gv.sh
