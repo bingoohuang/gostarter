@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -x #echo on
 
 target=local
 upx=yes
-bin=`basename "$PWD"`
+bin=$(basename "$PWD")
 
 function usage {
 	cat <<EOM
@@ -25,12 +25,9 @@ while getopts "t:b:u:h-:" optKey; do
     esac
 done
 
-echo bin:${bin}
-echo target:${target}
-echo upx:${upx}
-
-# notice how we avoid spaces in $now to avoid quotation hell in go build
-now=$(date +'%Y-%m-%d_%T')
+echo bin:"${bin}"
+echo target:"${target}"
+echo upx:"${upx}"
 
 if [[ ${target} = "linux" ]]; then
     export GOOS=linux
@@ -38,8 +35,9 @@ if [[ ${target} = "linux" ]]; then
     bin=${bin}_linux_amd64
 fi
 
-go fmt ./...
-go build -ldflags "-w -s -X main.sha1ver=`git rev-parse HEAD` -X main.builtTime=$now" -o "${bin}"
+./gv.sh
+
+go build -o "${bin}"
 if [[ ${upx} = "yes" ]] && type upx > /dev/null 2>&1; then
-    upx ${bin}
+    upx "${bin}"
 fi

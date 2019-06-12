@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"go-starter/ui"
 	"io/ioutil"
 	_ "net/http/pprof"
 	"os"
@@ -29,8 +28,6 @@ var (
 )
 
 func init() {
-	ui.InitSha1verBuiltTime(sha1ver, builtTime)
-
 	help := pflag.BoolP("help", "h", false, "help")
 	ipo := pflag.BoolP("init", "i", false, "init to create template config file and ctl.sh")
 	pflag.StringP("addr", "a", ":30057", "http address to listen and serve")

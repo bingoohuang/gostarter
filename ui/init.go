@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"go-starter/util"
 	"html/template"
 	"net/http"
 
@@ -9,16 +10,6 @@ import (
 
 	_ "go-starter/statiq"
 )
-
-var (
-	BuiltTime string
-	Sha1ver   string
-)
-
-func InitSha1verBuiltTime(sha1ver, builtTime string) {
-	Sha1ver = sha1ver
-	BuiltTime = builtTime
-}
 
 var StatiqFS *fs.StatiqFS
 
@@ -45,8 +36,8 @@ func HomepageHandler(c *gin.Context) {
 		Sha1ver   string
 		BuiltTime string
 	}{
-		Sha1ver:   Sha1ver,
-		BuiltTime: BuiltTime,
+		Sha1ver:   util.Version,
+		BuiltTime: util.Compile,
 	}
 	JSONOrTpl(args, homepageTpl, c)
 }
