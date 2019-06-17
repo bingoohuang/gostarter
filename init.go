@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"go-starter/util"
 	"io/ioutil"
 	_ "net/http/pprof"
 	"os"
@@ -19,12 +20,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
-)
-
-// refer : https://blog.kowalczyk.info/article/vEja/embedding-build-number-in-go-executable.html
-var (
-	sha1ver   string // sha1 revision used to build the program
-	builtTime string // when the executable was built
 )
 
 func init() {
@@ -50,7 +45,7 @@ func init() {
 	}
 
 	if *help {
-		fmt.Printf("Built on %s from sha1 %s\n", builtTime, sha1ver)
+		fmt.Printf("Built on %s from sha1 %s\n", util.Compile, util.Version)
 		pflag.PrintDefaults()
 		os.Exit(0)
 	}
