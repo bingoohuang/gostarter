@@ -27,7 +27,7 @@ function start() {
         return 1
     fi
 
-    nohup ${app} {{.BinArgs}} >/dev/null 2>&1 &
+    nohup ${app} {{.BinArgs}} >> ./nohup.out 2>&1 &
     sleep 1
     running=`ps -p $! | grep -v "PID TTY" | wc -l`
     if [[ ${running} -gt 0 ]];then
