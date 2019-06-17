@@ -77,7 +77,7 @@ func init() {
 		fmt.Println("Config file changed:", e.Name)
 	})
 
-	viper.SetEnvPrefix("go-starter")
+	viper.SetEnvPrefix("GO_STARTER")
 	viper.AutomaticEnv()
 
 	// 设置一些配置默认值

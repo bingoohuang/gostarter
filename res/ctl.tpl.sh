@@ -27,7 +27,7 @@ function start() {
         return 1
     fi
 
-    nohup ${app} {{.BinArgs}} &
+    nohup ${app} {{.BinArgs}} >/dev/null 2>&1 &
     sleep 1
     running=`ps -p $! | grep -v "PID TTY" | wc -l`
     if [[ ${running} -gt 0 ]];then
@@ -41,8 +41,10 @@ function start() {
 
 function stop() {
     pid=`cat ${pidFile}`
-    kill ${pid}
-    rm -f ${pidFile}
+    if [[ $? -eq 0 ]]; then
+        kill ${pid}
+        rm -f ${pidFile}
+    fi
     echo "${app} ${pid} stopped..."
 }
 
