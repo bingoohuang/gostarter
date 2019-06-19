@@ -1,4 +1,4 @@
-package main
+package util
 
 import (
 	"encoding/base64"
@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func auth(c *gin.Context) {
+func Auth(c *gin.Context) {
 	basicAuth := viper.GetString("BasicAuth")
 	if basicAuth == "" {
 		return
@@ -19,7 +19,7 @@ func auth(c *gin.Context) {
 		return
 	}
 
-	c.Header("WWW-Authenticate", `Basic realm="Starter Server"`)
+	c.Header("WWW-Authenticate", `Basic realm="go-starter Server"`)
 	c.AbortWithStatus(http.StatusUnauthorized)
 }
 

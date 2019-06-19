@@ -17,6 +17,7 @@ res/jquery
 test.json
 .DS_Store
 
+config.toml
 ctl
 var/
 
