@@ -64,9 +64,9 @@ function stop() {
 function status() {
   local pid=$(check_pid)
   if [[ ${pid} -gt 0 ]]; then
-    echo "started, pid=$pid"
+    echo "${app} started, pid=$pid"
   else
-    echo "stopped!"
+    echo "${app} stopped!"
   fi
 }
 
