@@ -39,6 +39,7 @@ binary = args.binary if args.binary else os.path.basename(os.getcwd())
 
 os_exec('./gv.sh')
 os_exec('go get github.com/bingoohuang/statiq')
+os_exec('rm -fr statiq/statiq.go')
 os_exec('statiq -src=res')
 os_exec(env + 'go build -o ' + binary)
 os_exec('upx ' + binary, check_cmd='upx') if args.upx else 0
