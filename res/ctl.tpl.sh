@@ -3,16 +3,17 @@
 export GIN_MODE=release
 mkdir -p var
 
-# set -x #echo on
+#set -x #echo on
 
-app={{.BinName}}
+app=./go-starter
 pidFile=var/pid
+moreArgs="${*:2}"
 
 function check_pid() {
   if [[ -f ${pidFile} ]]; then
     local pid=$(cat ${pidFile})
     if [[ -n ${pid} ]]; then
-      if [[ $(ps -p "${pid}" | wc -l) ]]; then
+      if [[ $(ps -p "${pid}" | grep -v "PID TTY" | wc -l) -gt 0 ]]; then
         echo "${pid}"
         return 1
       fi
@@ -39,10 +40,9 @@ function start() {
     return 1
   fi
 
-  nohup ${app} {{.BinArgs}} >>./nohup.out 2>&1 &
+  nohup ${app} {{.BinArgs}} ${moreArgs} >>./nohup.out 2>&1 &
   sleep 1
-  local running=$(ps -p $! | wc -l)
-  if [[ ${running} -gt 0 ]]; then
+  if [[ $(ps -p $! | grep -v "PID TTY" | wc -l) -gt 0 ]]; then
     echo $! >${pidFile}
     echo "$app started..., pid=$!"
     return 0

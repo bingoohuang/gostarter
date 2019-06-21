@@ -34,7 +34,7 @@ func InitFlags() {
 	if len(args) > 0 {
 		fmt.Printf("Unknown args %s\n", strings.Join(args, " "))
 		pflag.PrintDefaults()
-		os.Exit(0)
+		os.Exit(-1)
 	}
 
 	if *help {
