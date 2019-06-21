@@ -39,7 +39,7 @@ function start() {
     return 1
   fi
 
-  nohup ${app} >>./nohup.out 2>&1 &
+  nohup ${app} {{.BinArgs}} >>./nohup.out 2>&1 &
   sleep 1
   local running=$(ps -p $! | wc -l)
   if [[ ${running} -gt 0 ]]; then
