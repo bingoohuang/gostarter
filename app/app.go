@@ -31,11 +31,11 @@ func (a App) Run() {
 
 func CreateApp() *App {
 	util.InitFlags()
-	gin.SetMode(gin.ReleaseMode)
 
 	app := &App{}
 	app.startupTime = now.MakeNow()
-	app.R = gin.Default()
+
+	app.R = util.InitGin(util.InitLog())
 	app.UI = ui.CreateContext()
 
 	return app

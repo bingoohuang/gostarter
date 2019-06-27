@@ -1,3 +1,5 @@
 # some comments
-Port = 12345
+Addr = ":12345"
 Demo = "some config"
+# 如果不设置Logdir 默认会输出到控制台
+# Logdir = "./var"

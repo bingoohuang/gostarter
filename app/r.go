@@ -12,10 +12,10 @@ func (a App) Route() {
 	r := a.R
 
 	r.GET("/health", func(c *gin.Context) {
-		c.JSON(200, model.Rsp{Code: 200, Message: "started time:" + a.startupTime.P})
+		c.JSON(200, model.Rsp{Status: 200, Message: "started time:" + a.startupTime.P})
 	})
 	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, model.Rsp{Code: 200, Message: "pong, built time:" + util.Compile})
+		c.JSON(200, model.Rsp{Status: 200, Message: "pong, built time:" + util.Compile})
 	})
 	r.GET("/stats", func(c *gin.Context) {
 		c.JSON(200, struct {

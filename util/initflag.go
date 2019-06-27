@@ -5,12 +5,10 @@ import (
 	// pprof debug
 	_ "net/http/pprof"
 	"os"
-	"path/filepath"
 	"strings"
 
 	"github.com/bingoohuang/gou"
 	"github.com/fsnotify/fsnotify"
-	"github.com/sirupsen/logrus"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 )
@@ -20,8 +18,7 @@ func InitFlags() {
 	ipo := pflag.BoolP("init", "i", false, "init to create template config file and ctl.sh")
 	pflag.StringP("addr", "a", ":30057", "http address to listen and serve")
 	pflag.StringP("loglevel", "l", "info", "debug/info/warn/error")
-	pflag.StringP("logdir", "d", "./var", "log dir")
-	pflag.BoolP("logrus", "o", true, "enable logrus")
+	pflag.StringP("logdir", "d", "", "log dir")
 	pflag.BoolP("ui", "u", false, "enable simple ui")
 	pprofAddr := gou.PprofAddrPflag()
 
@@ -68,15 +65,4 @@ func InitFlags() {
 
 	_ = viper.BindPFlags(pflag.CommandLine)
 
-	if viper.GetBool("logrus") {
-		logdir := viper.GetString("logdir")
-		if err := os.MkdirAll(logdir, os.ModePerm); err != nil {
-			logrus.Panicf("failed to create %s error %v\n", logdir, err)
-		}
-
-		loglevel := viper.GetString("loglevel")
-		gou.InitLogger(loglevel, logdir, filepath.Base(os.Args[0])+".log")
-	} else {
-		logrus.SetLevel(logrus.DebugLevel)
-	}
 }
