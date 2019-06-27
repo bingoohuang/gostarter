@@ -5,7 +5,7 @@ mkdir -p var
 
 #set -x #echo on
 
-app=./go-starter
+app={{.BinName}}
 pidFile=var/pid
 moreArgs="${*:2}"
 

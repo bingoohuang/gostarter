@@ -21,11 +21,11 @@
 
 for release:
 
-1. `./gb.sh` for local
-1. `./gb.sh -t linux` for linux version
+1. `./gb.py` for local
+1. `./gb.py -t linux` for linux version
  
 ```bash
-$ ./gb.sh -h
+$ ./gb.py -h
 Usage: ./gb.sh [OPTION]...
 
   -t target   linux/local, default local
@@ -39,7 +39,7 @@ for dev:
 1. `go get github.com/bingoohuang/statiq`
 1. `./gr.sh`
 1. `statiq -src=res`
-1. `go fmt ./...;sh gb.sh`
+1. `go fmt ./...;./gb.py`
 
 ## start
 
