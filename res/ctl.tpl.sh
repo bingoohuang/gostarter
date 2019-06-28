@@ -1,12 +1,13 @@
 #!/bin/bash
 
 export GIN_MODE=release
+export PID_FILE=var/pid
 mkdir -p var
 
 #set -x #echo on
-
+pidFile=${PID_FILE}
 app={{.BinName}}
-pidFile=var/pid
+
 moreArgs="${*:2}"
 
 function check_pid() {
@@ -52,6 +53,16 @@ function start() {
   fi
 }
 
+function reload() {
+  local pid=$(check_pid)
+  if [[ $pid -gt 0 ]]; then
+    kill -USR2 "${pid}"
+  fi
+  sleep 1
+  local newPid=$(check_pid)
+  echo "${app} ${pid} updated to ${newPid}"
+}
+
 function stop() {
   local pid=$(check_pid)
   if [[ $pid -gt 0 ]]; then
@@ -85,10 +96,12 @@ elif [[ "$1" == "restart" ]]; then
   stop
   sleep 1
   start
+elif [[ "$1" == "reload" ]]; then
+  reload
 elif [[ "$1" == "status" ]]; then
   status
 elif [[ "$1" == "tail" ]]; then
   tailLog
 else
-  echo "$0 start|stop|restart|status|tail"
+  echo "$0 start|stop|restart|reload|status|tail"
 fi
