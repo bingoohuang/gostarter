@@ -73,7 +73,7 @@ func updatePidFile() {
 		return
 	}
 
-	logrus.Infof("old pid is %d, new pid is %d", os.Getpid(), oldPid)
+	logrus.Infof("old pid is %d, new pid is %d", oldPid, os.Getpid())
 
 	if os.Getpid() != oldPid {
 		_ = ioutil.WriteFile(pidFile, []byte(strconv.Itoa(os.Getpid())), 0644)

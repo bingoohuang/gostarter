@@ -17,6 +17,8 @@
     * `go get -u github.com/google/pprof`
     * `pprof -http=:8080heap.prof`
 
+1. reload supported by `kill -USR2 pid`
+
 ## build
 
 for release:

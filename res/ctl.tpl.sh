@@ -23,7 +23,7 @@ function check_pid() {
 
   # remove prefix ./
   local pureAppName=${app#"./"}
-  local running=$(pgrep -l $pureAppName | awk '{print $1}')
+  local running=$(ps -ef | grep $pureAppName | grep -v "grep" | awk '{print $2}')
   if [[ -n ${running} ]]; then
     echo "${running}" >${pidFile}
     echo "${running}"
