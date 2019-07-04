@@ -1,12 +1,13 @@
 package util
 
 import (
-	"github.com/bingoohuang/gou"
-	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 	"io"
 	"os"
 	"path/filepath"
+
+	"github.com/bingoohuang/gou"
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 func InitLog() io.Writer {
@@ -19,8 +20,8 @@ func InitLog() io.Writer {
 
 		loglevel := viper.GetString("loglevel")
 		return gou.InitLogger(loglevel, logdir, filepath.Base(os.Args[0])+".log")
-	} else {
-		logrus.SetLevel(logrus.DebugLevel)
-		return os.Stdout
 	}
+
+	logrus.SetLevel(logrus.DebugLevel)
+	return os.Stdout
 }

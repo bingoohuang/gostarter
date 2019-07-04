@@ -30,12 +30,8 @@ func (a App) Start() {
 func (a App) Run() {
 	addr := viper.GetString("addr")
 
-	//restart by self
-	var server *http.Server
-	server = &http.Server{
-		Addr:    addr,
-		Handler: a.R,
-	}
+	// restart by self
+	server := &http.Server{Addr: addr, Handler: a.R}
 
 	updatePidFile()
 

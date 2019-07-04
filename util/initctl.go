@@ -3,11 +3,11 @@ package util
 import (
 	"bytes"
 	"fmt"
-	"html/template"
 	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
+	"text/template"
 
 	"github.com/bingoohuang/statiq/fs"
 )
