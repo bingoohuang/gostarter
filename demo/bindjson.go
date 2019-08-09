@@ -22,10 +22,9 @@ func PostBindJSON(ctx *gin.Context, req *ReqBean) {
 }
 
 type Result struct {
-	Status  int    `json:"status"`
-	Message string `json:"message"`
-	//Metadata Metadata    `json:"metadata"`
-	Data interface{} `json:"data"`
+	Status  int         `json:"status"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
 }
 
 // WrapBindJSONImpl 包装请求体JSON解析
