@@ -28,7 +28,7 @@ func (a App) Route() {
 		})
 	})
 
-	r.POST("/bindjson", demo.WrapBindJSON(&demo.ReqBean{}, demo.PostBindJSON))
+	r.POST("/DemoWrapBindJSON", demo.WrapBindJSON())
 
 	if viper.GetBool("ui") {
 		g := r.Group("/", util.Auth)
