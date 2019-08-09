@@ -1,6 +1,7 @@
 package app
 
 import (
+	"go-starter/demo"
 	"go-starter/model"
 	"go-starter/util"
 
@@ -26,6 +27,8 @@ func (a App) Route() {
 			Count:       100,
 		})
 	})
+
+	r.POST("/bindjson", demo.WrapBindJSON(&demo.ReqBean{}, demo.PostBindJSON))
 
 	if viper.GetBool("ui") {
 		g := r.Group("/", util.Auth)
