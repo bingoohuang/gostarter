@@ -14,6 +14,14 @@ type ReqBean struct {
 }
 
 // Wrap函数，和处理函数，放在一起，对照出现，
+func WrapBindJSONRouter() gin.HandlerFunc { return WrapBindJSONImpl(PostBindJSON, PostBindJSONRouter) }
+
+// PostBindJSON 演示POST函数，预解析请求体到第二个参数
+func PostBindJSONRouter(_ *gin.Context) interface{} {
+	return &ReqBean{}
+}
+
+// Wrap函数，和处理函数，放在一起，对照出现，
 func WrapBindJSON() gin.HandlerFunc { return WrapBindJSONImpl(PostBindJSON, &ReqBean{}) }
 
 // PostBindJSON 演示POST函数，预解析请求体到第二个参数
@@ -30,12 +38,19 @@ type Result struct {
 // WrapBindJSONImpl 包装请求体JSON解析
 func WrapBindJSONImpl(handler interface{}, req interface{}) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		reqv := reflect.ValueOf(req)
+		if reqv.Kind() == reflect.Func {
+			router := req.(func(*gin.Context) interface{})
+			req = router(ctx)
+			reqv = reflect.ValueOf(req)
+		}
+
 		if err := ctx.ShouldBindJSON(req); err != nil {
 			ctx.JSON(http.StatusOK, Result{Status: 400, Message: err.Error()})
 			logrus.Errorf("handler %v", err)
 			return
 		}
 
-		reflect.ValueOf(handler).Call([]reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(req)})
+		reflect.ValueOf(handler).Call([]reflect.Value{reflect.ValueOf(ctx), reqv})
 	}
 }
