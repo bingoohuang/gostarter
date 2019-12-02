@@ -11,22 +11,23 @@ app={{.BinName}}
 moreArgs="${*:2}"
 
 function check_pid() {
+  # pid文件存在的话，从pid文件中读取pid
   if [[ -f ${pidFile} ]]; then
     local pid=$(cat ${pidFile})
-    if [[ -n ${pid} ]]; then
-      if [[ $(ps -p "${pid}" | grep -v "PID TTY" | wc -l) -gt 0 ]]; then
+    # 如果pid存在，并且是数字的话，检查改pid的进程是否存在
+    if [[ ${pid} =~ ^[0-9]+$ ]] && [[ $(ps -p "${pid}"| grep -v "PID TTY" | wc -l) -gt 0 ]]; then
         echo "${pid}"
         return 1
-      fi
     fi
   fi
 
   # remove prefix ./
   local pureAppName=${app#"./"}
-  local running=$(ps -ef | grep $pureAppName | grep -v "grep" | awk '{print $2}')
-  if [[ -n ${running} ]]; then
-    echo "${running}" >${pidFile}
-    echo "${running}"
+  local pid=$(ps -ef | grep "\b${pureAppName}\b" | grep -v grep | awk '{print $2}')
+  # make sure that pid is a number.
+  if [[ ${pid} =~ ^[0-9]+$ ]]; then
+    echo "${pid}" >${pidFile}
+    echo "${pid}"
     return 1
   fi
 
@@ -55,7 +56,7 @@ function start() {
 
 function reload() {
   local pid=$(check_pid)
-  if [[ $pid -gt 0 ]]; then
+  if [[ ${pid} -gt 0 ]]; then
     kill -USR2 "${pid}"
   fi
   sleep 1
@@ -65,7 +66,7 @@ function reload() {
 
 function stop() {
   local pid=$(check_pid)
-  if [[ $pid -gt 0 ]]; then
+  if [[ ${pid} -gt 0 ]]; then
     kill "${pid}"
     rm -f ${pidFile}
   fi
