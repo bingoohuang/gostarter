@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-starter/app"
+	"github.com/bingoohuang/gostarter/app"
 )
 
 func main() {

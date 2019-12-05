@@ -5,7 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/bingoohuang/gou"
+	"github.com/bingoohuang/gou/lo"
+
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
@@ -19,7 +20,7 @@ func InitLog() io.Writer {
 		}
 
 		loglevel := viper.GetString("loglevel")
-		return gou.InitLogger(loglevel, logdir, filepath.Base(os.Args[0])+".log")
+		return lo.InitLogger(loglevel, logdir, filepath.Base(os.Args[0])+".log")
 	}
 
 	logrus.SetLevel(logrus.DebugLevel)

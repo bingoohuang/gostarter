@@ -2,12 +2,14 @@ package util
 
 import (
 	"fmt"
+
 	// pprof debug
 	_ "net/http/pprof"
 	"os"
 	"strings"
 
-	"github.com/bingoohuang/gou"
+	"github.com/bingoohuang/gou/htt"
+	"github.com/bingoohuang/gou/lo"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -20,7 +22,7 @@ func InitFlags() {
 	pflag.StringP("loglevel", "l", "info", "debug/info/warn/error")
 	pflag.StringP("logdir", "d", "", "log dir")
 	pflag.BoolP("ui", "u", false, "enable simple ui")
-	pprofAddr := gou.PprofAddrPflag()
+	pprofAddr := htt.PprofAddrPflag()
 
 	// Add more pflags can be set from command line
 	// ...
@@ -41,14 +43,14 @@ func InitFlags() {
 	}
 
 	Ipo(*ipo)
-	gou.StartPprof(*pprofAddr)
+	htt.StartPprof(*pprofAddr)
 
 	// 从当前位置读取config.toml配置文件
 	viper.SetConfigName("config")
 	viper.SetConfigType("toml")
 	viper.AddConfigPath(".")
 
-	gou.LogErr(viper.ReadInConfig())
+	lo.Err(viper.ReadInConfig())
 
 	// Watching and re-reading config files
 	viper.WatchConfig()

@@ -7,7 +7,6 @@ package util
 import (
 	"bytes"
 	"fmt"
-	"go-starter/model"
 	"io"
 	"io/ioutil"
 	"log"
@@ -18,6 +17,8 @@ import (
 	"runtime"
 	"strings"
 	"time"
+
+	"github.com/bingoohuang/gostarter/model"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,13 +1,14 @@
 package app
 
 import (
-	"go-starter/ui"
-	"go-starter/util"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/bingoohuang/gostarter/ui"
+	"github.com/bingoohuang/gostarter/util"
 
 	"github.com/bingoohuang/now"
 	"github.com/facebookgo/grace/gracehttp"

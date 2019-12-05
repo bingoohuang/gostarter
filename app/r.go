@@ -1,9 +1,9 @@
 package app
 
 import (
-	"go-starter/demo"
-	"go-starter/model"
-	"go-starter/util"
+	"github.com/bingoohuang/gostarter/demo"
+	"github.com/bingoohuang/gostarter/model"
+	"github.com/bingoohuang/gostarter/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"

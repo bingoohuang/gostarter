@@ -1,15 +1,16 @@
 package ui
 
 import (
-	"go-starter/util"
 	"html/template"
 	"net/http"
+
+	"github.com/bingoohuang/gostarter/util"
 
 	"github.com/bingoohuang/statiq/fs"
 	"github.com/gin-gonic/gin"
 
 	// import static resources
-	_ "go-starter/statiq"
+	_ "github.com/bingoohuang/gostarter/statiq"
 )
 
 type Context struct {
