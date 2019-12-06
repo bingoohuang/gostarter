@@ -21,4 +21,5 @@ config.toml
 ctl
 var/
 
-go-starter
+gostarter
+/cnf.toml

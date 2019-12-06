@@ -46,7 +46,7 @@ func InitFlags() {
 	htt.StartPprof(*pprofAddr)
 
 	// 从当前位置读取config.toml配置文件
-	viper.SetConfigName("config")
+	viper.SetConfigName("cnf")
 	viper.SetConfigType("toml")
 	viper.AddConfigPath(".")
 
@@ -58,7 +58,7 @@ func InitFlags() {
 		fmt.Println("Config file changed:", e.Name)
 	})
 
-	viper.SetEnvPrefix("GO_STARTER")
+	viper.SetEnvPrefix("GOSTARTER")
 	viper.AutomaticEnv()
 
 	// 设置一些配置默认值

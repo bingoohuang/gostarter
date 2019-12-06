@@ -28,7 +28,7 @@ func ipoInit() error {
 		return err
 	}
 
-	if err = InitConfigFile(sfs, "/config.tpl.toml", "./config.toml"); err != nil {
+	if err = InitConfigFile(sfs, "/cnf.tpl.toml", "./cnf.toml"); err != nil {
 		return err
 	}
 

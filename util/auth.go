@@ -19,7 +19,7 @@ func Auth(c *gin.Context) {
 		return
 	}
 
-	c.Header("WWW-Authenticate", `Basic realm="go-starter Server"`)
+	c.Header("WWW-Authenticate", `Basic realm="gostarter Server"`)
 	c.AbortWithStatus(http.StatusUnauthorized)
 }
 

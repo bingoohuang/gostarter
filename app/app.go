@@ -36,7 +36,7 @@ func (a App) Run() {
 
 	updatePidFile()
 
-	logrus.Infof("go-starter started to run on addr %s", addr)
+	logrus.Infof("gostarter started to run on addr %s", addr)
 	if err := gracehttp.Serve(server); err != nil {
 		panic(err)
 	}
