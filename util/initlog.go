@@ -4,6 +4,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"regexp"
 
 	"github.com/bingoohuang/gou/str"
 
@@ -25,6 +26,23 @@ func DeclareLogPFlags() {
 	pflag.BoolP("logrus", "", true, "enable logrus")
 }
 
+// TextFormatter extends the prefixed.TextFormatter with line joining.
+type TextFormatter struct {
+	prefixed.TextFormatter
+	JoinLinesSeparator string
+}
+
+var reNewLines = regexp.MustCompile(`\r?\n`) // nolint
+
+// Format formats the log output.
+func (f *TextFormatter) Format(entry *logrus.Entry) ([]byte, error) {
+	if f.JoinLinesSeparator != "" {
+		entry.Message = reNewLines.ReplaceAllString(entry.Message, f.JoinLinesSeparator)
+	}
+
+	return f.TextFormatter.Format(entry)
+}
+
 // SetupLog setup log parameters.
 func SetupLog() io.Writer {
 	if !viper.GetBool("logrus") {
@@ -36,11 +54,14 @@ func SetupLog() io.Writer {
 
 	if logfmt != "json" {
 		// https://stackoverflow.com/a/48972299
-		logrus.SetFormatter(&prefixed.TextFormatter{
-			DisableColors:   true,
-			TimestampFormat: "2006-01-02 15:04:05",
-			FullTimestamp:   true,
-			ForceFormatting: true,
+		logrus.SetFormatter(&TextFormatter{
+			TextFormatter: prefixed.TextFormatter{
+				DisableColors:   true,
+				TimestampFormat: "2006-01-02 15:04:05",
+				FullTimestamp:   true,
+				ForceFormatting: true,
+			},
+			JoinLinesSeparator: `\n`,
 		})
 	}
 
