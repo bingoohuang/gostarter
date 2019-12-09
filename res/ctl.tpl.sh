@@ -84,7 +84,7 @@ function status() {
 
 function tailLog() {
   local ba=$(basename ${app})
-  local logfile="var/${ba}.log"
+  local logfile="var/logs/${ba}.log"
   local realfile=$(readlink "${logfile}")
   tail -f "$realfile"
 }
