@@ -3,8 +3,7 @@ package util
 import (
 	"fmt"
 
-	// pprof debug
-	_ "net/http/pprof"
+	_ "net/http/pprof" // nolint
 	"os"
 	"strings"
 
@@ -15,13 +14,15 @@ import (
 	"github.com/spf13/viper"
 )
 
+// InitFlags initializes the plfags.
 func InitFlags() {
 	help := pflag.BoolP("help", "h", false, "help")
 	ipo := pflag.BoolP("init", "i", false, "init to create template config file and ctl.sh")
 	pflag.StringP("addr", "a", ":30057", "http address to listen and serve")
-	pflag.StringP("loglevel", "l", "info", "debug/info/warn/error")
-	pflag.StringP("logdir", "d", "", "log dir")
+
+	DeclareLogPFlags()
 	pflag.BoolP("ui", "u", false, "enable simple ui")
+
 	pprofAddr := htt.PprofAddrPflag()
 
 	// Add more pflags can be set from command line
@@ -66,5 +67,4 @@ func InitFlags() {
 	// viper.SetDefault("CheckIntervalSeconds", 60)
 
 	_ = viper.BindPFlags(pflag.CommandLine)
-
 }

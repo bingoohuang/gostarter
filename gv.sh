@@ -20,7 +20,9 @@ cat <<EOF | gofmt >util/v.go
 package util
 
 const (
+    // Version show git commit version.
     Version = "$version"
+    // Compile shows the compile information.
     Compile = "$compile"
 )
 EOF

@@ -1,6 +1,8 @@
 package util
 
 const (
-	Version = "2019-06-27 11:08:05 +0800 @2c41f38ac3c1e2a97af8fbb3f1719afa1791e795 @"
-	Compile = "2019-06-28 11:41:40 +0800 by go version go1.12.1 darwin/amd64"
+	// Version show git commit version.
+	Version = "2019-12-06 20:06:25 +0800 @98e6c14596541607fed9a1b25576ec263035b684 @"
+	// Compile shows the compile information.
+	Compile = "2019-12-09 11:48:36 +0800 by go version go1.13.4 darwin/amd64"
 )

@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Route defines the routing of http.
 func (a App) Route() {
 	r := a.R
 
@@ -28,9 +29,11 @@ func (a App) Route() {
 		})
 	})
 
-	// curl "http://127.0.0.1:30057/DemoWrapBindJSON" -X POST -d '{"name":"bingoohuang","age":100}' -H "Content-Type: application/json"
+	// curl "http://127.0.0.1:30057/DemoWrapBindJSON" -X POST  \
+	// -d '{"name":"bingoohuang","age":100}' -H "Content-Type: application/json"
 	r.POST("/DemoWrapBindJSON", demo.WrapBindJSON())
-	// curl "http://127.0.0.1:30057/DemoWrapBindJSONRouter" -X POST -d '{"name":"bingoohuang","age":100}' -H "Content-Type: application/json"
+	// curl "http://127.0.0.1:30057/DemoWrapBindJSONRouter" -X POST  \
+	// -d '{"name":"bingoohuang","age":100}' -H "Content-Type: application/json"
 	r.POST("/DemoWrapBindJSONRouter", demo.WrapBindJSONRouter())
 
 	if viper.GetBool("ui") {
