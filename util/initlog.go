@@ -14,6 +14,7 @@ import (
 	"github.com/rifflock/lfshook"
 
 	"github.com/bingoohuang/gou/str"
+	"github.com/bingoohuang/now"
 
 	"github.com/spf13/pflag"
 
@@ -66,7 +67,7 @@ func SetupLog() io.Writer {
 		formatter = &TextFormatter{
 			TextFormatter: prefixed.TextFormatter{
 				DisableColors:   true,
-				TimestampFormat: "2006-01-02 15:04:05",
+				TimestampFormat: now.ConvertLayout("yyyyy-MM-dd HH:mm:ss.SSS"),
 				FullTimestamp:   true,
 				ForceFormatting: true,
 			},
