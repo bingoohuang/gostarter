@@ -13,12 +13,15 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+
+	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )
 
 // DeclareLogPFlags declares the log pflags.
 func DeclareLogPFlags() {
 	pflag.StringP("loglevel", "", "info", "debug/info/warn/error")
 	pflag.StringP("logdir", "", "var/logs", "log dir")
+	pflag.StringP("logfmt", "", "text/json", "default text")
 	pflag.BoolP("logrus", "", true, "enable logrus")
 }
 
@@ -27,6 +30,18 @@ func SetupLog() io.Writer {
 	if !viper.GetBool("logrus") {
 		logrus.SetLevel(logrus.DebugLevel)
 		return os.Stdout
+	}
+
+	logfmt := viper.GetString("logfmt")
+
+	if logfmt != "json" {
+		// https://stackoverflow.com/a/48972299
+		logrus.SetFormatter(&prefixed.TextFormatter{
+			DisableColors:   true,
+			TimestampFormat: "2006-01-02 15:04:05",
+			FullTimestamp:   true,
+			ForceFormatting: true,
+		})
 	}
 
 	loglevel := viper.GetString("loglevel")
