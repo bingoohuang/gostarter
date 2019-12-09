@@ -2,6 +2,7 @@ package util
 
 import (
 	"io"
+	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -121,7 +122,15 @@ func initLogger(level logrus.Level, logDir, filename string, formatter logrus.Fo
 	writerMap := writer
 
 	logrus.AddHook(lfshook.NewHook(writerMap, formatter))
-	logrus.SetOutput(writer)
+	logrus.SetOutput(&Discarder{})
 
 	return writer
+}
+
+// A Discarder sends all writes to ioutil.Discard.
+type Discarder struct{}
+
+// Write implements io.Writer.
+func (d *Discarder) Write(b []byte) (int, error) {
+	return ioutil.Discard.Write(b)
 }
