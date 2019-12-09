@@ -21,7 +21,7 @@ import (
 func DeclareLogPFlags() {
 	pflag.StringP("loglevel", "", "info", "debug/info/warn/error")
 	pflag.StringP("logdir", "", "var/logs", "log dir")
-	pflag.StringP("logfmt", "", "text/json", "default text")
+	pflag.StringP("logfmt", "", "", "log format(text/json), default text")
 	pflag.BoolP("logrus", "", true, "enable logrus")
 }
 
