@@ -9,17 +9,18 @@ import (
 	"strings"
 	"text/template"
 
+	"github.com/bingoohuang/gou/file"
 	"github.com/bingoohuang/statiq/fs"
 )
 
 // InitCtl initializes the ctl file.
 func InitCtl(sfs *fs.StatiqFS, ctlTplName, ctlFilename string) error {
-	exists, err := FileStat(ctlFilename)
+	exists, err := file.Stat(ctlFilename)
 	if err != nil {
 		return err
 	}
 
-	if exists == Exists {
+	if exists == file.Exists {
 		fmt.Println(ctlFilename + " already exists, ignored!")
 		return nil
 	}

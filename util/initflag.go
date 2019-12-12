@@ -3,9 +3,10 @@ package util
 import (
 	"fmt"
 
+	"github.com/bingoohuang/gou/cnf"
+
 	_ "net/http/pprof" // nolint
 	"os"
-	"strings"
 
 	"github.com/bingoohuang/gou/htt"
 	"github.com/bingoohuang/gou/lo"
@@ -20,7 +21,7 @@ func InitFlags() {
 	ipo := pflag.BoolP("init", "i", false, "init to create template config file and ctl.sh")
 	pflag.StringP("addr", "a", ":30057", "http address to listen and serve")
 
-	DeclareLogPFlags()
+	lo.DeclareLogPFlags()
 	pflag.BoolP("ui", "u", false, "enable simple ui")
 
 	pprofAddr := htt.PprofAddrPflag()
@@ -30,12 +31,7 @@ func InitFlags() {
 
 	pflag.Parse()
 
-	args := pflag.Args()
-	if len(args) > 0 {
-		fmt.Printf("Unknown args %s\n", strings.Join(args, " "))
-		pflag.PrintDefaults()
-		os.Exit(-1)
-	}
+	cnf.CheckUnknownPFlags()
 
 	if *help {
 		fmt.Printf("Built on %s from sha1 %s\n", Compile, Version)

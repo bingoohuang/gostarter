@@ -8,6 +8,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/bingoohuang/gou/lo"
+
 	"github.com/bingoohuang/gostarter/ui"
 	"github.com/bingoohuang/gostarter/util"
 
@@ -55,7 +57,7 @@ func CreateApp() *App {
 	app := &App{}
 	app.startupTime = now.MakeNow()
 
-	app.R = util.InitGin(util.SetupLog())
+	app.R = util.InitGin(lo.SetupLog())
 	app.UI = ui.CreateContext()
 
 	return app
