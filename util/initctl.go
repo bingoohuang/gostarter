@@ -15,12 +15,7 @@ import (
 
 // InitCtl initializes the ctl file.
 func InitCtl(sfs *fs.StatiqFS, ctlTplName, ctlFilename string) error {
-	exists, err := file.Stat(ctlFilename)
-	if err != nil {
-		return err
-	}
-
-	if exists == file.Exists {
+	if file.Stat(ctlFilename) == file.Exists {
 		fmt.Println(ctlFilename + " already exists, ignored!")
 		return nil
 	}
@@ -52,7 +47,7 @@ func InitCtl(sfs *fs.StatiqFS, ctlTplName, ctlFilename string) error {
 }
 
 func argsExcludeInit() []string {
-	binArgs := make([]string, 0, len(os.Args)-2)
+	binArgs := make([]string, 0, len(os.Args)-2) // nolint gomnd
 
 	for i, arg := range os.Args {
 		if i == 0 {

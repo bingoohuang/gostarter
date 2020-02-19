@@ -27,7 +27,7 @@ func WrapBindJSON() gin.HandlerFunc { return WrapBindJSONImpl(PostBindJSON, &Req
 
 // PostBindJSON 演示POST函数，预解析请求体到第二个参数
 func PostBindJSON(ctx *gin.Context, req *ReqBean) {
-	ctx.JSON(http.StatusOK, Result{Status: 200, Message: "v2", Data: req})
+	ctx.JSON(http.StatusOK, Result{Status: http.StatusOK, Message: "v2", Data: req})
 }
 
 // Result wraps results of REST.
@@ -48,8 +48,9 @@ func WrapBindJSONImpl(handler interface{}, req interface{}) gin.HandlerFunc {
 		}
 
 		if err := ctx.ShouldBindJSON(req); err != nil {
-			ctx.JSON(http.StatusOK, Result{Status: 400, Message: err.Error()})
+			ctx.JSON(http.StatusOK, Result{Status: http.StatusBadRequest, Message: err.Error()})
 			logrus.Errorf("handler %v", err)
+
 			return
 		}
 

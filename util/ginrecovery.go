@@ -83,7 +83,7 @@ func (g *GinRecovery) dealRecover(err interface{}, logger *log.Logger, c *gin.Co
 	}
 
 	if logger != nil {
-		stack := g.stack(3)
+		stack := g.stack(3) // nolint gomnd
 		httpRequest, _ := httputil.DumpRequest(c.Request, false)
 		headers := strings.Split(string(httpRequest), "\r\n")
 
@@ -112,7 +112,7 @@ func (g *GinRecovery) dealRecover(err interface{}, logger *log.Logger, c *gin.Co
 		c.Abort()
 	} else {
 		rsp := model.Rsp{
-			Status:  500,
+			Status:  http.StatusInternalServerError,
 			Message: "系统异常",
 		}
 		c.JSON(http.StatusOK, rsp)

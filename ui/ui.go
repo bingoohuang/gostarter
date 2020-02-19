@@ -59,8 +59,8 @@ func (c Context) HomepageHandler(g *gin.Context) {
 func (c Context) JSONOrTpl(args interface{}, tpl *template.Template, g *gin.Context) {
 	fmt := g.Query("format")
 	if fmt == "json" {
-		g.JSON(200, args)
+		g.JSON(http.StatusOK, args)
 	} else if err := tpl.Execute(g.Writer, args); err != nil {
-		g.String(500, "%v", err)
+		g.String(http.StatusInternalServerError, "%v", err)
 	}
 }

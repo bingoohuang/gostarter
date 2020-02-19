@@ -11,12 +11,7 @@ import (
 
 // InitCfgFile initializes the cfg file.
 func InitCfgFile(sfs *fs.StatiqFS, configTplFileName, configFileName string) error {
-	exists, err := file.Stat(configFileName)
-	if err != nil {
-		return err
-	}
-
-	if exists == file.Exists {
+	if file.Stat(configFileName) == file.Exists {
 		fmt.Printf("%s already exists, ignored!\n", configFileName)
 		return nil
 	}

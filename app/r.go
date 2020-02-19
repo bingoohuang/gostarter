@@ -1,6 +1,8 @@
 package app
 
 import (
+	"net/http"
+
 	"github.com/bingoohuang/gostarter/demo"
 	"github.com/bingoohuang/gostarter/model"
 	"github.com/bingoohuang/gostarter/util"
@@ -14,18 +16,18 @@ func (a App) Route() {
 	r := a.R
 
 	r.GET("/health", func(c *gin.Context) {
-		c.JSON(200, model.Rsp{Status: 200, Message: "started time:" + a.startupTime.P})
+		c.JSON(http.StatusOK, model.Rsp{Status: http.StatusOK, Message: "started time:" + a.startupTime.P})
 	})
 	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, model.Rsp{Status: 200, Message: "pong, built time:" + util.Compile})
+		c.JSON(http.StatusOK, model.Rsp{Status: http.StatusOK, Message: "pong, built time:" + util.Compile})
 	})
 	r.GET("/stats", func(c *gin.Context) {
-		c.JSON(200, struct {
+		c.JSON(http.StatusOK, struct {
 			StartupTime string
 			Count       int
 		}{
 			StartupTime: a.startupTime.String(),
-			Count:       100,
+			Count:       100, // nolint gomnd
 		})
 	})
 
