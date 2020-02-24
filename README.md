@@ -1,4 +1,4 @@
-# go-starter
+# gostarter
 
 <del>build a starter project for golang, including log, config, ctl, [statiq](https://github.com/bingoohuang/statiq) and etc.</del>
 
@@ -10,7 +10,7 @@
 1. [gin](https://github.com/gin-gonic/gin) 框架使用
 1. pprof 支持
 
-    * `./go-starter --pprof-addr localhost:6060`
+    * `./gostarter --pprof-addr localhost:6060`
     * open `http://localhost:6060/debug/pprof` in explorer
     * or 可视化数据（火焰图），见如下：
     * `curl http://localhost:6060/debug/pprof/heap > heap.prof`
@@ -32,7 +32,7 @@ Usage: ./gb.sh [OPTION]...
 
   -t target   linux/local, default local
   -u yes/no   enable upx compression if upx is available or not
-  -b          binary name, default go-starter
+  -b          binary name, default gostarter
   -h          display help
 ```
 
@@ -45,5 +45,5 @@ for dev:
 
 ## start
 
-run `./go-starter -o=false -u`.
+run `./gostarter -o=false -u`.
 

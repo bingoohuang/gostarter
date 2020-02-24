@@ -4,15 +4,14 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	"github.com/bingoohuang/gou/file"
+
 	"github.com/bingoohuang/statiq/fs"
 )
 
-func InitConfigFile(sfs *fs.StatiqFS, configTplFileName, configFileName string) error {
-	exists, err := FileStat(configFileName)
-	if err != nil {
-		return err
-	}
-	if exists == Exists {
+// InitCfgFile initializes the cfg file.
+func InitCfgFile(sfs *fs.StatiqFS, configTplFileName, configFileName string) error {
+	if file.Stat(configFileName) == file.Exists {
 		fmt.Printf("%s already exists, ignored!\n", configFileName)
 		return nil
 	}

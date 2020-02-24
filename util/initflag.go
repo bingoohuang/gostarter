@@ -3,10 +3,10 @@ package util
 import (
 	"fmt"
 
-	// pprof debug
-	_ "net/http/pprof"
+	"github.com/bingoohuang/gou/cnf"
+
+	_ "net/http/pprof" // nolint
 	"os"
-	"strings"
 
 	"github.com/bingoohuang/gou/htt"
 	"github.com/bingoohuang/gou/lo"
@@ -15,13 +15,15 @@ import (
 	"github.com/spf13/viper"
 )
 
+// InitFlags initializes the plfags.
 func InitFlags() {
 	help := pflag.BoolP("help", "h", false, "help")
 	ipo := pflag.BoolP("init", "i", false, "init to create template config file and ctl.sh")
 	pflag.StringP("addr", "a", ":30057", "http address to listen and serve")
-	pflag.StringP("loglevel", "l", "info", "debug/info/warn/error")
-	pflag.StringP("logdir", "d", "", "log dir")
+
+	lo.DeclareLogPFlags()
 	pflag.BoolP("ui", "u", false, "enable simple ui")
+
 	pprofAddr := htt.PprofAddrPflag()
 
 	// Add more pflags can be set from command line
@@ -29,12 +31,7 @@ func InitFlags() {
 
 	pflag.Parse()
 
-	args := pflag.Args()
-	if len(args) > 0 {
-		fmt.Printf("Unknown args %s\n", strings.Join(args, " "))
-		pflag.PrintDefaults()
-		os.Exit(-1)
-	}
+	cnf.CheckUnknownPFlags()
 
 	if *help {
 		fmt.Printf("Built on %s from sha1 %s\n", Compile, Version)
@@ -46,7 +43,7 @@ func InitFlags() {
 	htt.StartPprof(*pprofAddr)
 
 	// 从当前位置读取config.toml配置文件
-	viper.SetConfigName("config")
+	viper.SetConfigName("cnf")
 	viper.SetConfigType("toml")
 	viper.AddConfigPath(".")
 
@@ -58,7 +55,7 @@ func InitFlags() {
 		fmt.Println("Config file changed:", e.Name)
 	})
 
-	viper.SetEnvPrefix("GO_STARTER")
+	viper.SetEnvPrefix("GOSTARTER")
 	viper.AutomaticEnv()
 
 	// 设置一些配置默认值
@@ -66,5 +63,4 @@ func InitFlags() {
 	// viper.SetDefault("CheckIntervalSeconds", 60)
 
 	_ = viper.BindPFlags(pflag.CommandLine)
-
 }

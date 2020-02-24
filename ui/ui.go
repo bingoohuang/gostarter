@@ -13,12 +13,14 @@ import (
 	_ "github.com/bingoohuang/gostarter/statiq"
 )
 
+// Context defines the context of UI.
 type Context struct {
 	sfs         *fs.StatiqFS
 	homepageTpl *template.Template
 	fnMap       template.FuncMap
 }
 
+// CreateContext creates the Context.
 func CreateContext() *Context {
 	c := &Context{}
 	c.sfs, _ = fs.New()
@@ -36,10 +38,12 @@ func (c Context) loadTmpl(name string) *template.Template {
 	return template.Must(template.New(name).Funcs(c.fnMap).Parse(res))
 }
 
+// StaticHandler handles the static resources requests.
 func (c Context) StaticHandler() http.Handler {
 	return http.StripPrefix("/static", http.FileServer(c.sfs))
 }
 
+// HomepageHandler handles the homepage request.
 func (c Context) HomepageHandler(g *gin.Context) {
 	args := struct {
 		Sha1ver   string
@@ -51,11 +55,12 @@ func (c Context) HomepageHandler(g *gin.Context) {
 	c.JSONOrTpl(args, c.homepageTpl, g)
 }
 
+// JSONOrTpl handles the JSON or HTML requests.
 func (c Context) JSONOrTpl(args interface{}, tpl *template.Template, g *gin.Context) {
 	fmt := g.Query("format")
 	if fmt == "json" {
-		g.JSON(200, args)
+		g.JSON(http.StatusOK, args)
 	} else if err := tpl.Execute(g.Writer, args); err != nil {
-		g.String(500, "%v", err)
+		g.String(http.StatusInternalServerError, "%v", err)
 	}
 }
