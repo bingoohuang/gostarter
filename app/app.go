@@ -1,14 +1,10 @@
 package app
 
 import (
-	"fmt"
-	"io/ioutil"
 	"net/http"
-	"os"
-	"strconv"
-	"strings"
 
 	"github.com/bingoohuang/gou/lo"
+	"github.com/bingoohuang/gou/sy"
 
 	"github.com/bingoohuang/gostarter/ui"
 	"github.com/bingoohuang/gostarter/util"
@@ -39,7 +35,7 @@ func (a App) run() {
 	// restart by self
 	server := &http.Server{Addr: addr, Handler: a.R}
 
-	if err := UpdatePidFile("var/pid"); err != nil {
+	if err := sy.UpdatePidFile("var/pid"); err != nil {
 		logrus.Warnf("UpdatePidFile error %v", err)
 	}
 
@@ -61,29 +57,4 @@ func CreateApp() *App {
 	app.UI = ui.CreateContext()
 
 	return app
-}
-
-// UpdatePidFile update the pid to pidFile like var/pid (kill -USR2 {pid} 会执行重启)
-func UpdatePidFile(pidFile string) error {
-	if envPidFile := os.Getenv("PID_FILE"); envPidFile != "" {
-		pidFile = envPidFile
-	}
-
-	bytes, err := ioutil.ReadFile(pidFile)
-	if err != nil {
-		return fmt.Errorf("read pid file error %w", err)
-	}
-
-	oldPid, err := strconv.Atoi(strings.TrimSpace(string(bytes)))
-	if err != nil {
-		return fmt.Errorf("trans pid  error %w", err)
-	}
-
-	if os.Getpid() != oldPid {
-		if err := ioutil.WriteFile(pidFile, []byte(strconv.Itoa(os.Getpid())), 0644); err != nil {
-			return fmt.Errorf("write pid file %s error %w", pidFile, err)
-		}
-	}
-
-	return nil
 }

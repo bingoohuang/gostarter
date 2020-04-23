@@ -42,7 +42,7 @@ function start() {
     return 1
   fi
 
-  nohup ${app} {{.BinArgs}} ${moreArgs} >>./nohup.out 2>&1 &
+  nohup ${app} {{.BinArgs}} ${moreArgs} > /dev/null 2>&1 &
   sleep 1
   if [[ $(ps -p $! | grep -v "PID TTY" | wc -l) -gt 0 ]]; then
     echo $! >${pidFile}
@@ -85,8 +85,7 @@ function status() {
 function tailLog() {
   local ba=$(basename ${app})
   local logfile="var/logs/${ba}.log"
-  local realfile=$(readlink "${logfile}")
-  tail -f "$realfile"
+  tail -f "$logfile"
 }
 
 if [[ "$1" == "stop" ]]; then
