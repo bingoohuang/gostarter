@@ -3,7 +3,7 @@ module github.com/bingoohuang/gostarter
 go 1.12
 
 require (
-	github.com/bingoohuang/gou v0.0.0-20200427091629-aea537ba2971
+	github.com/bingoohuang/gou v0.0.0-20200427104110-9b847a792b6b
 	github.com/bingoohuang/now v0.0.0-20190715150822-ba8e4a91e3d9
 	github.com/bingoohuang/statiq v0.2.1
 	github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a // indirect
