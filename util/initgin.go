@@ -3,7 +3,6 @@ package util
 import (
 	"io"
 	"io/ioutil"
-	"time"
 
 	"github.com/sirupsen/logrus"
 
@@ -18,11 +17,6 @@ func InitGin(wr io.Writer) *gin.Engine {
 		gin.LoggerConfig{
 			Output: ioutil.Discard,
 			Formatter: func(p gin.LogFormatterParams) string {
-				if p.Latency > time.Minute {
-					// Truncate in a golang < 1.8 safe way
-					p.Latency -= p.Latency % time.Second
-				}
-
 				logrus.Debugf("[GIN] %3d| %13v | %15s |%-7s %s %s",
 					p.StatusCode,
 					p.Latency,
