@@ -16,6 +16,8 @@ github.com/bingoohuang/gonet v0.0.0-20190716021716-fd516efe8b31 h1:/tBafxR0LKZAu
 github.com/bingoohuang/gonet v0.0.0-20190716021716-fd516efe8b31/go.mod h1:lSe5gMXAiQESg/xTshM6sByKvDkMGdDffZSXt0d64JI=
 github.com/bingoohuang/gor v0.0.0-20200321095356-94cf6290c6ea h1:DGdKt4f+BciAcqlJ7v7LHCTO3wXBqeItwaLXKea4GjI=
 github.com/bingoohuang/gor v0.0.0-20200321095356-94cf6290c6ea/go.mod h1:ahEOivpxL+rGjwq6hk2H8aQEMh/Uc6r1N3ohugldIww=
+github.com/bingoohuang/gou v0.0.0-20200427104110-9b847a792b6b h1:oClcAEpNt6yiv/l8DRfHjmAc6pk948zTVKyjEXlMNYM=
+github.com/bingoohuang/gou v0.0.0-20200427104110-9b847a792b6b/go.mod h1:aDOwtkuv68JHEEsHoWJhqyUODo79t5k/erZCZllNBhc=
 github.com/bingoohuang/now v0.0.0-20190715150822-ba8e4a91e3d9 h1:Vt2Thh26NzWFYfLcH65bEiDe9RrkM1VxOfvbRwTxG5U=
 github.com/bingoohuang/now v0.0.0-20190715150822-ba8e4a91e3d9/go.mod h1:SZou0n15kP/Z3Vq8lyuH59ML96lepeGzInZw0+KCFw4=
 github.com/bingoohuang/statiq v0.2.1 h1:L7Uya0pM+wbw4CYkF9DVMJ0h0aSUx4mb0X7udk/M7NA=
