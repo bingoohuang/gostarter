@@ -1,6 +1,8 @@
 .PHONY: default test
 all: default test
 
+APPNAME=gostarter
+
 gosec:
 	go get github.com/securego/gosec/cmd/gosec
 sec:
@@ -18,3 +20,7 @@ install: init
 
 test: init
 	go test ./...
+
+linux:
+	GOOS=linux GOARCH=amd64 go install -ldflags="-s -w" ./...
+	upx ~/go/bin/linux_amd64/$(APPNAME)

@@ -45,8 +45,22 @@ function start() {
   nohup ${app} {{.BinArgs}} ${moreArgs} > /dev/null 2>&1 &
   sleep 1
   if [[ $(ps -p $! | grep -v "PID TTY" | wc -l) -gt 0 ]]; then
-    echo $! >${pidFile}
-    echo "$app started..., pid=$!"
+    local pid=$!
+    echo $pid >${pidFile}
+    echo "$app started..., pid=$pid"
+
+    # 以下代码需要root权限
+    if [[ ! -z "$LIMIT_MEMORY" ]]; then
+        # 限制最大使用内存
+        local pureAppName=${app#"./"}
+        # 内核要考虑页对齐, 所以生效的数量不一定完全等于设置的数量
+        mkdir -p /sys/fs/cgroup/memory/${pureAppName}
+        echo $LIMIT_MEMORY > /sys/fs/cgroup/memory/${pureAppName}/memory.limit_in_bytes
+        cat /sys/fs/cgroup/memory/${pureAppName}/memory.limit_in_bytes
+        echo $pid > /sys/fs/cgroup/memory/${pureAppName}/tasks
+        cat /sys/fs/cgroup/memory/${pureAppName}/tasks
+    fi
+
     return 0
   else
     echo "$app failed to start."

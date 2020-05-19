@@ -47,3 +47,9 @@ for dev:
 
 run `./gostarter -o=false -u`.
 
+
+## ctl 启停脚本
+
+- `./gostarter -i` 创建初始脚本 `./ctl` 和初始配置文件 `./cnf.toml`
+- `./ctl start|stop|restart|reload|status|tail` 启/停/重启/USR2信号重新加载/状态/日志
+- `LIMIT_MEMORY=100M ./ctl start|restart` root用户权限时，指定最大内存启/重启
