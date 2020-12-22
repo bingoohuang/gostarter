@@ -1,6 +1,6 @@
 # gostarter
 
-<del>build a starter project for golang, including log, config, ctl, [statiq](https://github.com/bingoohuang/statiq) and etc.</del>
+a starter project for golang, including log, config, ctl, [statiq](https://github.com/bingoohuang/statiq) and etc.
 
 ## functions
 

@@ -4,7 +4,7 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/bingoohuang/gostarter/util"
+	"github.com/bingoohuang/gostarter/internal/util"
 
 	"github.com/bingoohuang/statiq/fs"
 	"github.com/gin-gonic/gin"

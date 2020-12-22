@@ -1,14 +1,12 @@
 package app
 
 import (
+	"github.com/bingoohuang/gostarter/internal/util"
 	"net/http"
 
-	"github.com/bingoohuang/gou/lo"
 	"github.com/bingoohuang/gou/sy"
 
-	"github.com/bingoohuang/gostarter/ui"
-	"github.com/bingoohuang/gostarter/util"
-
+	"github.com/bingoohuang/gostarter/internal/ui"
 	"github.com/bingoohuang/now"
 	"github.com/facebookgo/grace/gracehttp"
 	"github.com/gin-gonic/gin"
@@ -21,6 +19,19 @@ type App struct {
 	startupTime now.Now
 	R           *gin.Engine
 	UI          *ui.Context
+}
+
+// CreateApp creates the application.
+func CreateApp() *App {
+	util.InitFlags()
+
+	app := &App{}
+	app.startupTime = now.MakeNow()
+
+	app.R = util.InitGin()
+	app.UI = ui.CreateContext()
+
+	return app
 }
 
 // Start starts the application.
@@ -44,17 +55,4 @@ func (a App) run() {
 	if err := gracehttp.Serve(server); err != nil {
 		panic(err)
 	}
-}
-
-// CreateApp creates the application.
-func CreateApp() *App {
-	util.InitFlags()
-
-	app := &App{}
-	app.startupTime = now.MakeNow()
-
-	app.R = util.InitGin(lo.SetupLog())
-	app.UI = ui.CreateContext()
-
-	return app
 }

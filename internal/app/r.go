@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/bingoohuang/gostarter/demo"
-	"github.com/bingoohuang/gostarter/model"
-	"github.com/bingoohuang/gostarter/util"
+	"github.com/bingoohuang/gostarter/internal/model"
+	"github.com/bingoohuang/gostarter/internal/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
@@ -27,7 +27,7 @@ func (a App) Route() {
 			Count       int
 		}{
 			StartupTime: a.startupTime.String(),
-			Count:       100, // nolint gomnd
+			Count:       100,
 		})
 	})
 

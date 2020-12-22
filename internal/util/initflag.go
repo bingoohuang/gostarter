@@ -21,7 +21,6 @@ func InitFlags() {
 	ipo := pflag.BoolP("init", "i", false, "init to create template config file and ctl.sh")
 	pflag.StringP("addr", "a", ":30057", "http address to listen and serve")
 
-	lo.DeclareLogPFlags()
 	pflag.BoolP("ui", "u", false, "enable simple ui")
 
 	pprofAddr := htt.PprofAddrPflag()

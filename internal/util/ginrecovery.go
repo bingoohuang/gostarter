@@ -18,7 +18,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bingoohuang/gostarter/model"
+	"github.com/bingoohuang/gostarter/internal/model"
 
 	"github.com/gin-gonic/gin"
 )
