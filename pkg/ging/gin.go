@@ -1,13 +1,18 @@
 package ging
 
 import (
+	"net/http"
+
 	"github.com/bingoohuang/gg/pkg/ginx"
 	"github.com/bingoohuang/gg/pkg/jsoni"
 	"github.com/bingoohuang/gg/pkg/jsoni/extra"
 	"github.com/bingoohuang/gg/pkg/strcase"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
+
+func init() {
+	gin.SetMode(gin.ReleaseMode)
+}
 
 // JsoniConfig tries to be 100% compatible with standard library behavior
 var JsoniConfig = func() jsoni.API {

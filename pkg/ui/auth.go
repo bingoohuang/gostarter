@@ -33,7 +33,6 @@ func PassBasicAuth(c *gin.Context, basicAuth string) bool {
 
 	base := authHeader[len("Basic "):]
 	userPass, err := base64.StdEncoding.DecodeString(base)
-
 	if err != nil {
 		return false
 	}

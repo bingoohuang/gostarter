@@ -2,12 +2,13 @@ package ui
 
 import (
 	"fmt"
-	"github.com/bingoohuang/gg/pkg/v"
-	"github.com/bingoohuang/gostarter/pkg/ging"
 	"io/fs"
 	"net/http"
 	"text/template"
 	"time"
+
+	"github.com/bingoohuang/gg/pkg/v"
+	"github.com/bingoohuang/gostarter/pkg/ging"
 
 	"github.com/gin-gonic/gin"
 )

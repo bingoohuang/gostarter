@@ -4,10 +4,9 @@ a starter project for golang
 
 ## features
 
-- [ ] yaml 配置文件使用示例
+- [x] yaml 配置文件使用示例
 - [ ] db 使用示例
-- [ ] golog 使用示例
-- [ ] viper 聚合配置使用
+- [x] golog 使用示例
 - [x] [gin](https://github.com/gin-gonic/gin) 框架使用
 - [x] pprof cpu 支持
 
