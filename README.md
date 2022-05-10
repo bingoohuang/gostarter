@@ -4,6 +4,8 @@ a starter project for golang
 
 ## features
 
+- [x] controllers 示例
+- [x] 登录授权示例
 - [x] yaml 配置文件使用示例
 - [ ] db 使用示例
 - [x] golog 使用示例

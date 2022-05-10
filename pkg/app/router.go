@@ -6,6 +6,13 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/bingoohuang/gostarter/pkg/controllers"
+
+	"github.com/bingoohuang/gostarter/pkg/model/cook"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
+	"github.com/vibrantbyte/go-antpath/antpath"
+
 	"github.com/bingoohuang/gg/pkg/ginx/adapt"
 	"github.com/bingoohuang/gg/pkg/ginx/anyfn"
 	"github.com/bingoohuang/golog/pkg/ginlogrus"
@@ -15,7 +22,6 @@ import (
 	"github.com/bingoohuang/gostarter/pkg/ging"
 	"github.com/bingoohuang/gostarter/pkg/model"
 	"github.com/bingoohuang/gostarter/pkg/ui"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,6 +31,7 @@ var startupTime = time.Now().Format(`2006-01-02 15:03:04`)
 func StartWeb() {
 	r := gin.New()
 	r.Use(ginlogrus.Logger(nil, true), gin.Recovery())
+	r.Use(sessions.Sessions("gostarter", cookie.NewStore([]byte("PAS6roKzT0ES3BpuChp7hacQAmR9soka"))), loginFilter)
 
 	r.GET("/health", func(c *gin.Context) {
 		ging.JSON(c, model.Rsp{Status: http.StatusOK, Message: "started time:" + startupTime})
@@ -44,34 +51,10 @@ func StartWeb() {
 
 	ar := adapt.Adapt(r)
 	af := anyfn.NewAdapter()
+	registerWrappers(af)
 	ar.RegisterAdapter(af)
 
-	ar.POST("/demo", af.F(func(m *model.DemoReq) *model.DemoRsp {
-		return &model.DemoRsp{Name: "Echo: " + m.Name}
-	}))
-	/*
-		$ gurl POST :1235/demo name=@name
-		POST /demo HTTP/1.1
-		Host: 127.0.0.1:1235
-		Accept: application/json
-		Accept-Encoding: gzip, deflate
-		Content-Type: application/json
-		Gurl-Date: Tue, 10 May 2022 06:20:41 GMT
-		User-Agent: gurl/1.0.0
-
-		{
-		  "name": "Fairyink"
-		}
-
-		HTTP/1.1 200 OK
-		Content-Type: application/json; charset=utf-8
-		Date: Tue, 10 May 2022 06:20:41 GMT
-		Content-Length: 25
-
-		{
-		  "name": "Echo: Fairyink"
-		}
-	*/
+	controllers.Register(ar, af)
 
 	g := r.Group("/", ui.Auth)
 	g.GET("/", ui.Handler(""))
@@ -80,4 +63,39 @@ func StartWeb() {
 	log.Printf("start to listen on %s", addr)
 	err := r.Run(addr)
 	logx.Fatalf(err, "run failed: %v", err)
+}
+
+func loginFilter(c *gin.Context) {
+	if user, _ := cook.GetLogin(c); user != nil {
+		c.Set(model.LoginUser, user)
+		return
+	}
+
+	if pathMatchersAny(c.Request.URL.Path, conf.Conf.IgnorePaths) {
+		log.Printf("D! 忽略授权 %s ", c.Request.URL.Path)
+		return
+	}
+
+	log.Printf("W! 未授权访问 %s ", c.Request.URL.Path)
+	c.JSON(http.StatusUnauthorized, nil)
+	c.Abort()
+}
+
+var antMatcher = antpath.New()
+
+func pathMatchersAny(uri string, paths []string) bool {
+	for _, p := range paths {
+		if antMatcher.Match(p, uri) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func GetLogin(c *gin.Context) *model.Login {
+	if v, _ := c.Get(model.LoginUser); v != nil {
+		return v.(*model.Login)
+	}
+	return nil
 }

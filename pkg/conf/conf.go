@@ -24,6 +24,8 @@ type conf struct {
 	V        int           `count:"true"`                                         // 命令行上，支持 -v 或者 -vv 等计数形式的参数
 	Size     uint64        `flag:",s" size:"true" val:"10MiB" yaml:",label=size"` // 字节大小，短名 s
 	Pmem     float32
+
+	IgnorePaths []string
 }
 
 // MyFlag 演示自定义 flag 的使用

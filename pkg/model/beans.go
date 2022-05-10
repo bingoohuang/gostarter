@@ -16,3 +16,12 @@ type DemoReq struct {
 type DemoRsp struct {
 	Name string
 }
+
+type Login struct {
+	UserId    uint32
+	Username  string
+	Role      string
+	TimeStamp string
+}
+
+const LoginUser = "_loginUser"

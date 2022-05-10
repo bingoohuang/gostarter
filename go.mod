@@ -2,13 +2,15 @@ module github.com/bingoohuang/gostarter
 
 go 1.18
 
-// replace github.com/bingoohuang/gg => /Users/bingoobjca/github/gg
+//replace github.com/bingoohuang/gg => /Users/bingoobjca/github/gg
 
 require (
-	github.com/bingoohuang/gg v0.0.0-20220510055722-4ed3867fa903
+	github.com/bingoohuang/gg v0.0.0-20220510081227-22aad5ceeb5e
 	github.com/bingoohuang/golog v0.0.0-20220510063034-c86bf97d307f
+	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/gin v1.7.7
 	github.com/spf13/viper v1.11.0
+	github.com/vibrantbyte/go-antpath v1.1.1
 )
 
 require (
@@ -19,6 +21,9 @@ require (
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/gorilla/context v1.1.1 // indirect
+	github.com/gorilla/securecookie v1.1.1 // indirect
+	github.com/gorilla/sessions v1.2.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
