@@ -6,14 +6,18 @@ level: all
 #  输出列表
 output:
   - stdout
-#  - log-yyyy-MM-dd.log:100M
+  - log-yyyy-MM-dd.log:100M
 #  -  http://192.168.126.18:5003 
+
+log:
+  spec: stdout=true
+  layout:
 
 #  时长
 duration: 4m
 
 # 端口号
-port: 1235
+port: 1234
 
 # 文件大小
 size: 10MiB
