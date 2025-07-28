@@ -40,7 +40,7 @@ func init() {
 	flagparse.Parse(conf.Conf,
 		flagparse.AutoLoadYaml("conf", "conf.yml"),
 		flagparse.ProcessInit(&gostarter.InitAssets))
-	golog.Setup()
+	golog.Setup(golog.Spec(conf.Conf.Log.Spec), golog.Layout(conf.Conf.Log.Layout))
 	sigx.RegisterSignalProfile()
 
 	// export GOLOG_STDOUT=true to check the log

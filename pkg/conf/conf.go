@@ -15,8 +15,12 @@ type conf struct {
 
 	// 以下配置为示例配置（exportable)，根据实际业务需要进行调整
 	// 其中默认值只有在 conf.yml 文件中响应参数没必要定义时才生效
-	Level    string        `val:"all" usage:"Output level"` // 也可以通过环境变量进行设置（例如：export GG_LEVEL=INFO)
-	Output   []string      // 演示切片行参数
+	Level  string   `val:"all" usage:"Output level"` // 也可以通过环境变量进行设置（例如：export GG_LEVEL=INFO)
+	Output []string // 演示切片行参数
+	Log    struct {
+		Spec   string
+		Layout string
+	}
 	Duration time.Duration `flag:"d"`                                             // 命令行参数 -d，演示时长参数类型
 	MyFlag   MyFlag        `flag:"my"`                                            // 命令行参数 -my，演示自定义解析类型参数
 	Port     int           `flag:"p" val:"1234"`                                  // 命令行参数 -p 默认值 1234
