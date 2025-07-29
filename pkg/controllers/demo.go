@@ -1,11 +1,57 @@
 package controllers
 
-import "github.com/bingoohuang/gostarter/pkg/model"
+import (
+	"github.com/bingoohuang/gostarter/pkg/db"
+	"github.com/bingoohuang/gostarter/pkg/model"
+)
 
-func init() { registerController("POST", "/demo", demo) }
+func init() {
+	registerController("POST", "/demo", demo)
+	registerController("POST", "/users", addUser)
+	registerController("GET", "/users", findUsers)
+}
 
 func demo(m *model.DemoReq) *model.DemoRsp {
 	return &model.DemoRsp{Name: "Echo: " + m.Name}
+}
+
+type Result struct {
+	Status  int
+	Message string
+}
+
+type User struct {
+	ID    int    `db:"id"`
+	Name  string `db:"name"`
+	Email string `db:"email"`
+	Age   int    `db:"age"`
+}
+
+/*
+	curl -X POST http://localhost:1234/users \
+	  -H "Content-Type: application/json" \
+	  -d '{"name":"zhangsan", "email":"zhangsan@gmail.com", "age":18}'
+*/
+func addUser(user User) string {
+	sql := `INSERT INTO users (name, email, age) VALUES (?, ?, ?)`
+	_, err := db.X.Exec(sql, user.Name, user.Email, user.Age)
+	if err != nil {
+		return err.Error()
+	}
+	return "success"
+}
+
+/*
+	curl http://localhost:1234/users
+*/
+
+func findUsers() []User {
+	var users []User
+	err := db.X.Select(&users, "SELECT * FROM users")
+	if err != nil {
+		return nil
+	}
+	return users
 }
 
 /*

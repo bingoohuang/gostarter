@@ -7,7 +7,7 @@ a starter project for golang
 - [x] controllers 示例
 - [x] 登录授权示例
 - [x] yaml 配置文件使用示例
-- [ ] db 使用示例
+- [x] db 使用示例
 - [x] golog 使用示例
 - [x] [gin](https://github.com/gin-gonic/gin) 框架使用
 - [x] pprof cpu 支持

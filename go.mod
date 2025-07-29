@@ -7,6 +7,8 @@ require (
 	github.com/bingoohuang/golog v0.0.0-20240909041443-283abc3a5ce0
 	github.com/gin-contrib/sessions v1.0.4
 	github.com/gin-gonic/gin v1.10.1
+	github.com/jmoiron/sqlx v1.4.0
+	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/spf13/viper v1.20.1
 	github.com/vibrantbyte/go-antpath v1.1.1
 )
