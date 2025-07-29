@@ -12,6 +12,7 @@ type DbConf struct {
 	MaxIdleConnections int
 	ConnMaxLifetime    int
 	ConnMaxIdleTime    int
+	EnableStats        bool
 }
 
 // conf Command line options
