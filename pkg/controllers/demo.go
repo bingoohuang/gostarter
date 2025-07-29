@@ -2,22 +2,21 @@ package controllers
 
 import (
 	"github.com/bingoohuang/gostarter/pkg/db"
+	"github.com/bingoohuang/gostarter/pkg/ging"
 	"github.com/bingoohuang/gostarter/pkg/model"
+	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func init() {
 	registerController("POST", "/demo", demo)
+	registerController("GET", "/stats-x", getXStats)
 	registerController("POST", "/users", addUser)
 	registerController("GET", "/users", findUsers)
 }
 
 func demo(m *model.DemoReq) *model.DemoRsp {
 	return &model.DemoRsp{Name: "Echo: " + m.Name}
-}
-
-type Result struct {
-	Status  int
-	Message string
 }
 
 type User struct {
@@ -52,6 +51,25 @@ func findUsers() []User {
 		return nil
 	}
 	return users
+}
+
+// curl http://localhost:1234/stats-x
+func getXStats(c *gin.Context) {
+	if db.X == nil {
+		ging.JSON(c, model.Rsp{Status: http.StatusOK, Message: ""})
+		return
+	}
+	stats := db.X.Stats()
+	ging.JSON(c, map[string]interface{}{
+		"MaxOpenConnections": stats.MaxOpenConnections,
+		"OpenConnections":    stats.OpenConnections,
+		"InUse":              stats.InUse,
+		"Idle":               stats.Idle,
+		"WaitCount":          stats.WaitCount,
+		"WaitDuration":       stats.WaitDuration,
+		"MaxIdleClosed":      stats.MaxIdleClosed,
+		"MaxLifetimeClosed":  stats.MaxLifetimeClosed,
+	})
 }
 
 /*

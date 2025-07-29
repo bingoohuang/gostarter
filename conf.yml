@@ -17,6 +17,7 @@ db:
 #单位为分钟
   connMaxLifetime: 5
   connMaxIdleTime: 1
+  enableState: true
 
 log:
   spec: stdout=true

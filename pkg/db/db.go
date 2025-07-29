@@ -12,7 +12,6 @@ import (
 var X *sqlx.DB
 
 func InitDB() *sqlx.DB {
-
 	dbConf := conf.Conf.Db
 	if dbConf.Driver == "" {
 		logrus.Info("no driver")
