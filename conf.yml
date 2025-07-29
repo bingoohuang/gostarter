@@ -7,7 +7,16 @@ level: all
 output:
   - stdout
   - log-yyyy-MM-dd.log:100M
-#  -  http://192.168.126.18:5003 
+#  -  http://192.168.126.18:5003
+
+db:
+  driver: sqlite3
+  dataSource: "file::memory:?cache=shared"
+  maxOpenConnections: 20
+  maxIdleConnections: 10
+#单位为分钟
+  connMaxLifetime: 5
+  connMaxIdleTime: 1
 
 log:
   spec: stdout=true

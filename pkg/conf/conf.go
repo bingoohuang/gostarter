@@ -1,10 +1,18 @@
 package conf
 
 import (
-	"time"
-
 	"github.com/bingoohuang/gg/pkg/fla9"
+	"time"
 )
+
+type DbConf struct {
+	Driver             string
+	DataSource         string
+	MaxOpenConnections int
+	MaxIdleConnections int
+	ConnMaxLifetime    int
+	ConnMaxIdleTime    int
+}
 
 // conf Command line options
 type conf struct {
@@ -21,6 +29,7 @@ type conf struct {
 		Spec   string
 		Layout string
 	}
+	Db       DbConf
 	Duration time.Duration `flag:"d"`                                             // 命令行参数 -d，演示时长参数类型
 	MyFlag   MyFlag        `flag:"my"`                                            // 命令行参数 -my，演示自定义解析类型参数
 	Port     int           `flag:"p" val:"1234"`                                  // 命令行参数 -p 默认值 1234

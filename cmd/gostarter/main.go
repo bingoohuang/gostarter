@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/bingoohuang/gostarter/pkg/db"
 	"log"
 
 	"github.com/bingoohuang/gg/pkg/emb"
@@ -18,6 +19,7 @@ import (
 
 func main() {
 	go app.StartWeb()
+	go db.InitDB()
 
 	// 可以使用 conf.Conf 获取配置参数
 	log.Printf("example config duration: %s", conf.Conf.Duration)
